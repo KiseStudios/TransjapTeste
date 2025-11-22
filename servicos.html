@@ -6,23 +6,19 @@
     <title>TRANSJAP | Obras e Serviços</title>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body class="bg-dark">
 
-   <header class="scrolled">
+    <header class="scrolled">
         <div class="container nav-container">
-            <a href="/" class="logo">TRANSJAP<span class="dot">.</span></a>
-            
+            <a href="index.html" class="logo">TRANSJAP<span class="dot">.</span></a>
             <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
-
             <nav>
                 <ul class="nav-list">
-                    <li><a href="/" class="nav-link">Início</a></li>
-                    <li><a href="/#sobre" class="nav-link">A Empresa</a></li>
-                    
-                    <li><a href="/servicos" class="nav-link active">Nossos Serviços</a></li>
-                    
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="index.html#sobre" class="nav-link">A Empresa</a></li>
+                    <li><a href="servicos.html" class="nav-link active">Nossos Serviços</a></li>
                     <li><a href="https://wa.me/5527999860110" class="btn-nav">Orçamento <i class="fas fa-arrow-right"></i></a></li>
                 </ul>
             </nav>
@@ -33,18 +29,17 @@
         <div class="container center">
             <span class="section-tag">NOSSO PORTFÓLIO</span>
             <h1 class="section-title text-white">OBRAS REALIZADAS</h1>
-            <p class="text-gray" style="max-width: 600px; margin: 0 auto;">
-                Conheça alguns dos grandes projetos de infraestrutura onde a Transjap atuou com excelência, cumprindo prazos e normas de segurança.
+            <p class="text-gray" style="max-width: 700px; margin: 0 auto;">
+                A Transjap orgulha-se de participar de grandes empreendimentos de infraestrutura no Brasil.
             </p>
         </div>
     </section>
 
     <section class="projects-section">
         <div class="container">
-
             <div class="project-row">
                 <div class="project-image">
-                    <img src="{{ url_for('static', filename='img/porto_acu.jpg') }}" alt="Porto do Açu">
+                    <img src="static/img/porto_acu.jpg" alt="Porto do Açu">
                 </div>
                 <div class="project-content">
                     <span class="project-location"><i class="fas fa-map-marker-alt"></i> São João da Barra - RJ</span>
@@ -57,39 +52,36 @@
                     </ul>
                 </div>
             </div>
-
             <div class="project-row reverse">
                 <div class="project-image">
-                    <img src="{{ url_for('static', filename='img/biancogres.jpg') }}" alt="Obra Biancogres">
+                    <img src="static/img/biancogres.jpg" alt="Obra Biancogres">
                 </div>
                 <div class="project-content">
-                    <span class="project-location"><i class="fas fa-map-marker-alt"></i> Espírito Santo</span>
-                    <h2>BIANCOGRES</h2>
-                    <p>Execução de terraplenagem para expansão industrial de uma das maiores fabricantes de porcelanato do país.</p>
+                    <span class="project-location"><i class="fas fa-map-marker-alt"></i> Serra - ES</span>
+                    <h2>EXPANSÃO BIANCOGRES</h2>
+                    <p>Execução de terraplenagem pesada para a expansão do parque industrial.</p>
                     <ul>
                         <li><i class="fas fa-check"></i> Corte e aterro em grande escala.</li>
                         <li><i class="fas fa-check"></i> Nivelamento de platôs industriais.</li>
-                        <li><i class="fas fa-check"></i> Uso intensivo de escavadeiras e caminhões traçados.</li>
+                        <li><i class="fas fa-check"></i> Uso intensivo de escavadeiras CAT 336.</li>
                     </ul>
                 </div>
             </div>
-
             <div class="project-row">
                 <div class="project-image">
-                    <img src="{{ url_for('static', filename='img/posto_es.jpg') }}" alt="Posto Espírito Santo">
+                    <img src="static/img/posto_es.jpg" alt="Posto Espírito Santo">
                 </div>
                 <div class="project-content">
-                    <span class="project-location"><i class="fas fa-map-marker-alt"></i> BR-262 - ES</span>
+                    <span class="project-location"><i class="fas fa-map-marker-alt"></i> Domingos Martins - ES</span>
                     <h2>POSTO ESPÍRITO SANTO</h2>
-                    <p>Preparação de terreno para complexo de serviços e parada de caminhões. Uma obra que exigiu agilidade e compactação de solo rigorosa.</p>
+                    <p>Preparação completa de terreno para complexo de serviços na BR-262.</p>
                     <ul>
                         <li><i class="fas fa-check"></i> Preparação de base e sub-base.</li>
-                        <li><i class="fas fa-check"></i> Drenagem e movimentação de terra.</li>
-                        <li><i class="fas fa-check"></i> Acabamento com motoniveladora.</li>
+                        <li><i class="fas fa-check"></i> Obras de drenagem profunda.</li>
+                        <li><i class="fas fa-check"></i> Acabamento fino com motoniveladora.</li>
                     </ul>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -98,6 +90,27 @@
             <p class="text-gray">&copy; 2025 Transjap Transportes Dois Irmãos LTDA.</p>
         </div>
     </footer>
-
+    
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.querySelector('.nav-list');
+        if(menuToggle){
+            menuToggle.addEventListener('click', () => {
+                if (navList.style.display === 'flex') {
+                    navList.style.display = 'none';
+                } else {
+                    navList.style.display = 'flex';
+                    navList.style.flexDirection = 'column';
+                    navList.style.position = 'absolute';
+                    navList.style.top = '80px';
+                    navList.style.left = '0';
+                    navList.style.width = '100%';
+                    navList.style.background = 'rgba(5,5,5,0.98)';
+                    navList.style.padding = '20px';
+                    navList.style.borderBottom = '2px solid #F7C800';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

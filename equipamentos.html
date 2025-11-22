@@ -6,14 +6,14 @@
     <title>TRANSJAP | Catálogo de Equipamentos</title>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body class="bg-dark">
 
     <header class="scrolled" style="position: relative; border-bottom: 1px solid #333;">
         <div class="container nav-container">
-            <a href="/" class="logo">TRANSJAP<span class="dot">.</span></a>
-            <a href="/" class="btn-nav" style="border: 1px solid #fff; color: #fff !important; background: transparent;">
+            <a href="index.html" class="logo">TRANSJAP<span class="dot">.</span></a>
+            <a href="index.html" class="btn-nav" style="border: 1px solid #fff; color: #fff !important; background: transparent;">
                 <i class="fas fa-arrow-left"></i> Voltar para Home
             </a>
         </div>
@@ -22,20 +22,20 @@
     <section class="section-padding">
         <div class="container">
             <div class="center" style="margin-bottom: 60px;">
-                <span class="section-tag">NOSSAS FROTAS</span>
-                <h1 class="section-title text-white">CATÁLOGO FROTAS</h1>
+                <span class="section-tag">NOSSA FROTA</span>
+                <h1 class="section-title text-white">CATÁLOGO COMPLETO</h1>
                 
                 <div class="fleet-highlight">
                     <i class="fas fa-warehouse"></i>
                     <span>Contamos com mais de <strong style="color: #F7C800; font-size: 1.2rem;">130 EQUIPAMENTOS</strong> na sede</span>
                 </div>
+
                 <p class="text-gray" style="margin-top: 20px;">Equipamentos de ponta para terraplenagem, pavimentação e apoio logístico.</p>
             </div>
 
             <div class="fleet-grid">
-                
                 <div class="fleet-card">
-                    <img src="{{ url_for('static', filename='img/patrol.jpg') }}" alt="Motoniveladora Patrol">
+                    <img src="static/img/patrol.jpg" alt="Motoniveladora Patrol">
                     <div class="card-overlay">
                         <div class="card-content">
                             <span class="card-cat">NIVELAMENTO</span>
@@ -45,9 +45,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="fleet-card">
-                    <img src="{{ url_for('static', filename='img/rolo.jpg') }}" alt="Rolo Compactador">
+                    <img src="static/img/rolo.jpg" alt="Rolo Compactador">
                     <div class="card-overlay">
                         <div class="card-content">
                             <span class="card-cat">COMPACTAÇÃO</span>
@@ -57,9 +56,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="fleet-card">
-                    <img src="{{ url_for('static', filename='img/retro.jpg') }}" alt="Retroescavadeira">
+                    <img src="static/img/retro.jpg" alt="Retroescavadeira">
                     <div class="card-overlay">
                         <div class="card-content">
                             <span class="card-cat">ESCAVAÇÃO</span>
@@ -69,9 +67,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="fleet-card">
-                    <img src="{{ url_for('static', filename='img/prancha.jpg') }}" alt="Carreta Prancha">
+                    <img src="static/img/prancha.jpg" alt="Carreta Prancha">
                     <div class="card-overlay">
                         <div class="card-content">
                             <span class="card-cat">LOGÍSTICA</span>
@@ -81,9 +78,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="fleet-card">
-                    <img src="{{ url_for('static', filename='img/comboio.jpg') }}" alt="Caminhão Comboio">
+                    <img src="static/img/comboio.jpg" alt="Caminhão Comboio">
                     <div class="card-overlay">
                         <div class="card-content">
                             <span class="card-cat">APOIO</span>
@@ -93,9 +89,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="fleet-card">
-                    <img src="{{ url_for('static', filename='img/pipa.jpg') }}" alt="Caminhão Pipa">
+                    <img src="static/img/pipa.jpg" alt="Caminhão Pipa">
                     <div class="card-overlay">
                         <div class="card-content">
                             <span class="card-cat">APOIO</span>
@@ -105,7 +100,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             
             <div class="center" style="margin-top: 80px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 60px;">
@@ -113,7 +107,6 @@
                 <p class="text-gray" style="margin-bottom: 30px;">Nossa frota é renovada constantemente.</p>
                 <a href="https://wa.me/5527999860110" class="whatsapp-btn">Consultar Disponibilidade</a>
             </div>
-
         </div>
     </section>
 
@@ -122,6 +115,5 @@
             <p class="text-gray">&copy; 2025 Transjap Transportes Dois Irmãos LTDA.</p>
         </div>
     </footer>
-
 </body>
 </html>
