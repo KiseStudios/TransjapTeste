@@ -1,58 +1,53 @@
-// --- EFEITO PARALLAX (IMAGEM SEGUE O MOUSE SUAVEMENTE) ---
-const heroBg = document.getElementById('hero-bg');
+// --- MENU MOBILE TOGGLE ---
+const menuToggle = document.getElementById('mobile-menu');
+const navList = document.querySelector('.nav-list');
 
+if(menuToggle){
+    menuToggle.addEventListener('click', () => {
+        // Alterna a classe 'active' que está no CSS (display: flex)
+        navList.classList.toggle('active');
+        
+        // Muda o ícone de barras para X (opcional, visual)
+        const icon = menuToggle.querySelector('i');
+        if (navList.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+}
+
+// --- EFEITO PARALLAX HERO (Se existir) ---
+const heroBg = document.getElementById('hero-bg');
 if (heroBg) {
-    // Variáveis para suavização (Lerp)
     let mouseX = 0, mouseY = 0;
     let currentX = 0, currentY = 0;
-
     window.addEventListener('mousemove', (e) => {
-        // Pega posição do mouse (-1 a 1)
         mouseX = (e.clientX / window.innerWidth) * 2 - 1;
         mouseY = (e.clientY / window.innerHeight) * 2 - 1;
     });
-
     function animateBg() {
-        // Interpolação linear para movimento suave (delay)
         currentX += (mouseX - currentX) * 0.05;
         currentY += (mouseY - currentY) * 0.05;
-
-        // Aplica o movimento (Ajuste -20px para mover mais ou menos)
-        const moveX = currentX * -20; 
-        const moveY = currentY * -10;
-
-        // Aplica no CSS
-        heroBg.style.transform = `translate(${moveX}px, ${moveY}px)`;
-
+        heroBg.style.transform = `translate(${currentX * -20}px, ${currentY * -10}px)`;
         requestAnimationFrame(animateBg);
     }
-
     animateBg();
 }
 
-// --- MENU & SCROLL (MANTIDO IGUAL) ---
+// --- EFEITO PARALLAX PARTICULAS (Se existir) ---
+// (Mantido caso você mude de ideia e volte para partículas)
+const container = document.getElementById('canvas-container');
+if (container) {
+    // ... (Seu código de Three.js anterior das partículas fica aqui se quiser manter backup) ...
+    // Se estiver usando a imagem estática, este bloco simplesmente não roda.
+}
+
+// --- HEADER SCROLL ---
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
 });
-
-const menuToggle = document.getElementById('mobile-menu');
-const navList = document.querySelector('.nav-list');
-if(menuToggle){
-    menuToggle.addEventListener('click', () => {
-        if (navList.style.display === 'flex') {
-            navList.style.display = 'none';
-        } else {
-            navList.style.display = 'flex';
-            navList.style.flexDirection = 'column';
-            navList.style.position = 'absolute';
-            navList.style.top = '80px';
-            navList.style.left = '0';
-            navList.style.width = '100%';
-            navList.style.background = 'rgba(5,5,5,0.98)';
-            navList.style.padding = '20px';
-            navList.style.borderBottom = '2px solid #F7C800';
-        }
-    });
-}
