@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRANSJAP | Infraestrutura Inteligente</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">TRANSJAP<span class="dot">.</span></a>
+            <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+           <nav>
+    <ul class="nav-list">
+        <li><a href="#home" class="nav-link">Início</a></li>
+        <li><a href="#sobre" class="nav-link">A Empresa</a></li>
+        
+        <li><a href="/servicos" class="nav-link">Nossos Serviços</a></li>
+        
+        <li><a href="#contato" class="btn-nav">Orçamento <i class="fas fa-arrow-right"></i></a></li>
+    </ul>
+</nav>
+        </div>
+    </header>
+<section id="home" class="hero-interactive">
+        
+        <div class="hero-bg-image" id="hero-bg"></div>
+        
+        <div class="dark-overlay"></div>
+        
+        <div class="hero-content-centered">
+            <h1 class="glitch-text">TRANSJAP</h1>
+            <p>TERRAPLENAGEM & CONSTRUÇÕES</p>
+            
+            <div class="scroll-indicator">
+                <span class="mouse-icon"></span>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="section-padding">
+        <div class="container about-grid">
+            <div class="about-text">
+                <span class="section-tag">QUEM SOMOS</span>
+                <h2 class="section-title">SOLIDEZ EM CADA <br>METRO CÚBICO</h2>
+                <p>Não alugamos apenas máquinas; entregamos produtividade e precisão topográfica. Com sede estratégica no Espírito Santo, a Transjap atua há 15 anos transformando projetos complexos em realidade.</p>
+                <div class="stats-row">
+                    <div class="stat-item"><strong>15+</strong><span>Anos de Exp.</span></div>
+                    <div class="stat-item"><strong>100%</strong><span>Frota Própria</span></div>
+                </div>
+            </div>
+            <div class="about-image-wrapper">
+                <img src="{{ url_for('static', filename='img/logo_grande.png') }}" alt="Logo Transjap" class="about-logo">
+            </div>
+        </div>
+    </section>
+
+    <section id="frota" class="section-padding bg-dark">
+        <div class="container">
+            
+            <div class="section-header-flex">
+                <div class="header-text">
+                    <h2 class="section-title text-white" style="margin-bottom: 5px;">NOSSOS EQUIPAMENTOS</h2>
+                    <p class="text-gray">Destaques da nossa frota revisada.</p>
+                </div>
+                <a href="/equipamentos" class="btn-ver-mais">
+                    VER CATÁLOGO COMPLETO <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="fleet-grid">
+                <div class="fleet-card">
+                    <img src="{{ url_for('static', filename='img/escavadeira.jpg') }}" alt="Escavadeira">
+                    <div class="card-overlay">
+                        <div class="card-content">
+                            <span class="card-cat">ESCAVAÇÃO</span>
+                            <h3>Escavadeira Hidráulica</h3>
+                            <p>Modelos CAT 320 e 336. Alta precisão e caçambas reforçadas.</p>
+                            <a href="/equipamentos" class="card-btn">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="fleet-card">
+                    <img src="{{ url_for('static', filename='img/trator.jpg') }}" alt="Trator">
+                    <div class="card-overlay">
+                        <div class="card-content">
+                            <span class="card-cat">TERRAPLENAGEM</span>
+                            <h3>Trator de Esteira</h3>
+                            <p>Modelos D6T e D5T. Potência de lâmina para cortes profundos.</p>
+                            <a href="/equipamentos" class="card-btn">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="fleet-card">
+                    <img src="{{ url_for('static', filename='img/caminhao.jpg') }}" alt="Caminhão">
+                    <div class="card-overlay">
+                        <div class="card-content">
+                            <span class="card-cat">TRANSPORTE</span>
+                            <h3>Caminhão Traçado</h3>
+                            <p>Basculantes 6x4 de 16m³. Preparados para terrenos severos.</p>
+                            <a href="/equipamentos" class="card-btn">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contato">
+        <div class="container footer-flex">
+            <div class="footer-info">
+                <h3>TRANSJAP<span class="dot">.</span></h3>
+                <p>Rod. BR262 - Km 94,5 - Domingos Martins - ES</p>
+            </div>
+            <div class="footer-contact">
+                <a href="https://wa.me/5527999860110" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> (27) 99986-0110</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Transjap Transportes Dois Irmãos LTDA.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

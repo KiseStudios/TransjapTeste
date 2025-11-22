@@ -1,0 +1,346 @@
+/* =========================================
+   1. IMPORTAÇÕES E BASE
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&family=Roboto:wght@300;400&display=swap');
+
+:root {
+    --amarelo: #F7C800;
+    --preto: #0a0a0a;
+    --cinza-escuro: #151515;
+    --branco: #ffffff;
+    --transicao: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Roboto', sans-serif; background-color: var(--branco); color: #333; overflow-x: hidden; }
+
+h1, h2, h3, .logo, .btn-nav, .section-tag, .stat-item strong { 
+    font-family: 'Sora', sans-serif; text-transform: uppercase; 
+}
+
+/* --- CLASSES UTILITÁRIAS (CORREÇÃO DE COR) --- */
+.text-white { color: #ffffff !important; } /* Força o branco */
+.text-gray { color: #888888 !important; }
+.bg-dark { background-color: var(--cinza-escuro); color: white; }
+.center { text-align: center; }
+
+/* =========================================
+   2. HEADER & MENU
+   ========================================= */
+/* =========================================
+   2. HEADER (SEMI-TRANSPARENTE DESDE O INÍCIO)
+   ========================================= */
+/* =========================================
+   2. HEADER (SEMPRE TRANSPARENTE E FIXO)
+   ========================================= */
+header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    
+    /* Tamanho fixo (não encolhe mais) */
+    padding: 30px 0;
+    
+    /* Fundo Vidro Constante */
+    background: rgba(0, 0, 0, 0.3); /* 30% de preto (bem transparente) */
+    backdrop-filter: blur(10px);     /* Desfoque constante */
+    
+    /* Linha sutil */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* Suavidade apenas para sombra (se quiser adicionar depois) */
+    transition: box-shadow 0.3s ease;
+}
+
+/* Estado ao rolar a página (Apenas adiciona sombra para leitura) */
+header.scrolled {
+    /* NÃO muda cor */
+    /* NÃO muda tamanho */
+    
+    /* Apenas uma sombra suave para separar do conteúdo branco lá embaixo */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Ajuste do container */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+
+/* Logo (Tamanho fixo) */
+.logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+.dot { color: var(--amarelo); }
+
+/* ... (Mantenha o resto: nav-list, nav-link, btn-nav iguais) ... */
+
+.nav-list { display: flex; gap: 40px; list-style: none; align-items: center; }
+.nav-link {
+    color: rgba(255,255,255,0.7); text-decoration: none; font-family: 'Sora', sans-serif;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; position: relative; transition: 0.3s;
+}
+.nav-link:hover { color: white; }
+.nav-link::after {
+    content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 50%;
+    background-color: var(--amarelo); transition: 0.3s; transform: translateX(-50%);
+}
+.nav-link:hover::after { width: 100%; }
+
+.btn-nav {
+    font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; padding: 12px 28px;
+    background: rgba(247, 200, 0, 0.05); border: 1px solid var(--amarelo); color: var(--amarelo) !important;
+    border-radius: 4px; text-decoration: none; display: flex; align-items: center; gap: 10px;
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); transition: var(--transicao);
+}
+.btn-nav:hover { background: var(--amarelo); color: var(--preto) !important; box-shadow: 0 0 20px rgba(247, 200, 0, 0.4); }
+
+/* =========================================
+   3. HERO SECTION (FOTO REAL NÍTIDA)
+   ========================================= */
+.hero-interactive {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #050505;
+}
+
+/* Configuração da Imagem de Fundo */
+.hero-bg-image {
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%; /* Um pouco maior para poder mexer (Parallax) */
+    height: 110%;
+    
+    /* CAMINHO DA IMAGEM */
+    background-image: url('img/hero_bg.jpg');
+    
+    background-size: cover;       /* Cobre a tela toda */
+    background-position: center;  /* Centraliza */
+    background-repeat: no-repeat;
+    z-index: 0;
+    
+    /* Otimização de qualidade */
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* Camada Escura (Para o texto ler bem) */
+.dark-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+    /* Gradiente: Mais escuro embaixo, mais claro em cima */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+}
+
+/* Centralização do Conteúdo */
+.hero-content-centered {
+    position: relative;
+    z-index: 10; /* Fica acima da imagem e do overlay */
+    text-align: center;
+    color: white;
+    pointer-events: none; /* O mouse passa direto para o efeito parallax */
+}
+
+/* --- O TEXTO ANIMADO (MANTIDO IGUAL) --- */
+.glitch-text {
+    font-family: 'Sora', sans-serif;
+    font-size: 6rem; /* Bem grande */
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin: 0;
+    color: transparent;
+    /* Contorno branco fino */
+    -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+    position: relative;
+    text-transform: uppercase;
+}
+
+.glitch-text::before {
+    content: 'TRANSJAP';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0%;
+    height: 100%;
+    color: var(--amarelo); /* Preenche de amarelo */
+    -webkit-text-stroke: 0;
+    border-right: 4px solid var(--amarelo);
+    overflow: hidden;
+    /* Animação de digitar/preencher */
+    animation: fillText 2.5s cubic-bezier(0.7, 0, 0.3, 1) forwards 0.5s;
+}
+
+@keyframes fillText { to { width: 100%; } }
+
+/* Subtítulo Estiloso */
+.hero-content-centered p {
+    margin-top: 20px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    letter-spacing: 6px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8); /* Sombra para ler em cima da foto */
+}
+
+/* Mouse Scroll Indicator */
+.scroll-indicator {
+    position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%);
+    opacity: 0.8; animation: bounce 2s infinite;
+}
+.mouse-icon {
+    width: 26px; height: 40px; border: 2px solid white; border-radius: 20px;
+    display: block; position: relative;
+}
+.mouse-icon::before {
+    content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 4px; background: var(--amarelo); border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .glitch-text { font-size: 3rem; }
+    .hero-bg-image { background-position: 60% center; } /* Ajuste para celular focar na máquina */
+}
+/* =========================================
+   4. PÁGINAS INTERNAS (Correção de Cor e Padding)
+   ========================================= */
+.page-header {
+    padding-top: 200px;
+    padding-bottom: 80px;
+    background-color: var(--cinza-escuro);
+}
+
+/* =========================================
+   5. CARDS E ELEMENTOS GERAIS
+   ========================================= */
+.section-padding { padding: 120px 0; }
+.section-tag { color: var(--amarelo); font-weight: bold; letter-spacing: 2px; font-size: 0.8rem; display: block; margin-bottom: 15px; }
+
+.section-title { 
+    font-size: 3rem; 
+    margin-bottom: 25px; 
+    color: var(--preto); /* Padrão preto (para fundo branco) */
+    line-height: 1.1; 
+}
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-text p { line-height: 1.8; color: #555; margin-bottom: 15px; }
+.stats-row { display: flex; gap: 60px; margin-top: 40px; border-top: 1px solid #eee; padding-top: 40px; }
+.stat-item strong { font-size: 3rem; color: var(--amarelo); display: block; font-family: 'Sora'; }
+.about-image-wrapper { display: flex; justify-content: center; align-items: center; }
+.about-image-wrapper img.about-logo { box-shadow: none; border-radius: 0; max-height: 250px; width: auto; display: block; }
+
+/* PORTFÓLIO (ZIG-ZAG) */
+.projects-section { padding-bottom: 100px; background-color: var(--cinza-escuro); }
+.project-row { display: flex; align-items: center; justify-content: space-between; gap: 60px; margin-bottom: 120px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 60px; }
+.project-row:last-child { border: none; margin-bottom: 0; }
+.project-row.reverse { flex-direction: row-reverse; }
+.project-image { flex: 1; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.project-image img { width: 100%; height: 400px; object-fit: cover; transition: transform 0.6s; display: block; }
+.project-image:hover img { transform: scale(1.05); }
+.project-content { flex: 1; padding: 10px; color: white; }
+.project-location { color: var(--amarelo); font-family: 'Sora'; font-weight: 800; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+.project-content h2 { font-size: 2.8rem; margin-bottom: 25px; line-height: 1.1; color: white; }
+.project-content p { color: #bbb; font-size: 1.05rem; line-height: 1.7; margin-bottom: 30px; }
+.project-content ul { list-style: none; padding: 0; }
+.project-content ul li { margin-bottom: 12px; color: #ddd; display: flex; gap: 10px; }
+.project-content ul li i { color: var(--amarelo); margin-top: 5px; }
+
+/* CABEÇALHO FLEXÍVEL */
+.section-header-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+.btn-ver-mais { color: var(--amarelo); font-family: 'Sora'; font-weight: 800; text-decoration: none; font-size: 0.9rem; border: 1px solid var(--amarelo); padding: 10px 25px; border-radius: 50px; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+.btn-ver-mais:hover { background: var(--amarelo); color: var(--preto); transform: translateX(5px); }
+
+.fleet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 60px; }
+.fleet-card { position: relative; height: 480px; border-radius: 12px; overflow: hidden; cursor: pointer; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+.fleet-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
+.card-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.1) 60%); display: flex; align-items: flex-end; padding: 40px 30px; transition: 0.5s; }
+.card-content { transform: translateY(30px); transition: 0.5s; width: 100%; }
+.card-cat { color: var(--amarelo); font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+.card-content h3 { font-size: 1.6rem; margin-bottom: 10px; color: white; }
+.card-content p { font-size: 0.95rem; color: #ccc; margin-bottom: 25px; opacity: 0; max-height: 0; transition: 0.5s; line-height: 1.5; }
+.card-btn { display: inline-block; color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; border-bottom: 2px solid var(--amarelo); padding-bottom: 3px; opacity: 0; transition: 0.5s; }
+.fleet-card:hover img { transform: scale(1.15); }
+.fleet-card:hover .card-overlay { background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 100%); }
+.fleet-card:hover .card-content { transform: translateY(0); }
+.fleet-card:hover p, .fleet-card:hover .card-btn { opacity: 1; max-height: 100px; }
+
+/* FOOTER */
+footer { background: #050505; padding: 80px 0 30px; color: #666; }
+.footer-flex { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 50px; margin-bottom: 30px; }
+.footer-info h3 { font-size: 2rem; color: white; margin-bottom: 10px; }
+.whatsapp-btn { background: #25D366; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; }
+.whatsapp-btn:hover { background: #1ebe57; transform: translateY(-3px); }
+.copyright { text-align: center; font-size: 0.8rem; }
+
+/* MOBILE */
+.menu-toggle { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+@media (max-width: 900px) {
+    .project-row, .project-row.reverse { flex-direction: column; gap: 30px; margin-bottom: 80px; text-align: left; }
+    .project-image img { height: 250px; }
+    .project-content h2 { font-size: 2rem; }
+    .hero-content-centered h1 { font-size: 2.8rem; letter-spacing: 2px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .nav-list { display: none; }
+    .menu-toggle { display: block; }
+    .footer-flex { flex-direction: column; gap: 30px; text-align: center; }
+    .section-header-flex { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+/* --- DESTAQUE DE FROTA (TEXTO +130 EQUIPAMENTOS) --- */
+.fleet-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    
+    background: rgba(255, 255, 255, 0.05); /* Fundo cinza transparente */
+    border: 1px solid rgba(247, 200, 0, 0.3); /* Borda amarela sutil */
+    padding: 15px 30px;
+    border-radius: 50px; /* Formato de pílula */
+    
+    margin: 10px 0;
+    
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    
+    /* Efeito de brilho sutil */
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.fleet-highlight i {
+    color: var(--amarelo);
+    font-size: 1.5rem;
+}
+
+/* Responsivo para celular */
+@media (max-width: 768px) {
+    .fleet-highlight {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px;
+    }
+}
+/* --- ESTADO ATIVO DO MENU (DESTAQUE) --- */
+
+/* Deixa o texto branco brilhante */
+.nav-link.active {
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* Mantém a linha amarela sempre visível */
+.nav-link.active::after {
+    width: 100%; /* Largura total */
+}

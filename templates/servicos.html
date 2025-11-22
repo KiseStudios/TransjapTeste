@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRANSJAP | Obras e Serviços</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark">
+
+   <header class="scrolled">
+        <div class="container nav-container">
+            <a href="/" class="logo">TRANSJAP<span class="dot">.</span></a>
+            
+            <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="/" class="nav-link">Início</a></li>
+                    <li><a href="/#sobre" class="nav-link">A Empresa</a></li>
+                    
+                    <li><a href="/servicos" class="nav-link active">Nossos Serviços</a></li>
+                    
+                    <li><a href="https://wa.me/5527999860110" class="btn-nav">Orçamento <i class="fas fa-arrow-right"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container center">
+            <span class="section-tag">NOSSO PORTFÓLIO</span>
+            <h1 class="section-title text-white">OBRAS REALIZADAS</h1>
+            <p class="text-gray" style="max-width: 600px; margin: 0 auto;">
+                Conheça alguns dos grandes projetos de infraestrutura onde a Transjap atuou com excelência, cumprindo prazos e normas de segurança.
+            </p>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <div class="container">
+
+            <div class="project-row">
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='img/porto_acu.jpg') }}" alt="Porto do Açu">
+                </div>
+                <div class="project-content">
+                    <span class="project-location"><i class="fas fa-map-marker-alt"></i> São João da Barra - RJ</span>
+                    <h2>PORTO DO AÇU</h2>
+                    <p>O maior complexo portuário-industrial da América Latina. A Transjap atuou em frentes cruciais de infraestrutura neste empreendimento gigantesco.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Movimentação de materiais rochosos.</li>
+                        <li><i class="fas fa-check"></i> Apoio logístico para exportação de minério.</li>
+                        <li><i class="fas fa-check"></i> Terraplenagem de precisão para pátios.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-row reverse">
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='img/biancogres.jpg') }}" alt="Obra Biancogres">
+                </div>
+                <div class="project-content">
+                    <span class="project-location"><i class="fas fa-map-marker-alt"></i> Espírito Santo</span>
+                    <h2>BIANCOGRES</h2>
+                    <p>Execução de terraplenagem para expansão industrial de uma das maiores fabricantes de porcelanato do país.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Corte e aterro em grande escala.</li>
+                        <li><i class="fas fa-check"></i> Nivelamento de platôs industriais.</li>
+                        <li><i class="fas fa-check"></i> Uso intensivo de escavadeiras e caminhões traçados.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-row">
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='img/posto_es.jpg') }}" alt="Posto Espírito Santo">
+                </div>
+                <div class="project-content">
+                    <span class="project-location"><i class="fas fa-map-marker-alt"></i> BR-262 - ES</span>
+                    <h2>POSTO ESPÍRITO SANTO</h2>
+                    <p>Preparação de terreno para complexo de serviços e parada de caminhões. Uma obra que exigiu agilidade e compactação de solo rigorosa.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Preparação de base e sub-base.</li>
+                        <li><i class="fas fa-check"></i> Drenagem e movimentação de terra.</li>
+                        <li><i class="fas fa-check"></i> Acabamento com motoniveladora.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container center">
+            <p class="text-gray">&copy; 2025 Transjap Transportes Dois Irmãos LTDA.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
