@@ -183,20 +183,59 @@ footer { background: #050505; padding: 80px 0 30px; color: #666; }
 .copyright { text-align: center; font-size: 0.8rem; }
 
 /* =========================================
-   6. RESPONSIVIDADE (MOBILE FIX)
+   6. RESPONSIVIDADE (MOBILE FIXO)
    ========================================= */
 @media (max-width: 900px) {
     
-    /* Fontes menores */
-    .glitch-text { font-size: 3rem; letter-spacing: 2px; }
-    .section-title { font-size: 2.2rem; }
-    .project-content h2 { font-size: 2rem; }
+    /* --- HERO (CAPA) --- */
+    /* Ajusta a foto para focar mais na máquina em telas verticais */
+    .hero-bg-image {
+        background-position: 65% center; 
+    }
     
-    /* Menu Mobile */
+    .hero-content-centered {
+        padding: 0 15px; /* Margem para não colar na borda */
+    }
+
+    .hero-content-centered h1 { 
+        font-size: 2.5rem; /* Texto Transjap menor para caber */
+        letter-spacing: 2px; 
+    }
+    
+    .hero-content-centered p {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+    }
+
+    /* --- SEÇÃO SOBRE (QUEM SOMOS) --- */
+    .about-grid { 
+        grid-template-columns: 1fr; /* Empilha um embaixo do outro */
+        gap: 40px; 
+    }
+    
+    .about-text {
+        text-align: center; /* Centraliza o texto no celular */
+        padding: 0 10px;
+    }
+    
+    /* CORREÇÃO DA LOGO GIGANTE */
+    .about-image-wrapper img.about-logo { 
+        max-width: 80%; /* Ocupa no máximo 80% da largura da tela */
+        height: auto;   /* Mantém a proporção */
+        max-height: 100px; /* Limita a altura */
+        margin: 0 auto; /* Centraliza */
+    }
+    
+    .stats-row { 
+        justify-content: center; /* Centraliza os números */
+        gap: 40px; 
+    }
+    
+    /* --- MENU --- */
     .menu-toggle { display: block; }
     
     .nav-list {
-        display: none; /* Esconde menu padrão */
+        display: none;
         position: absolute;
         top: 100%;
         left: 0;
@@ -207,30 +246,31 @@ footer { background: #050505; padding: 80px 0 30px; color: #666; }
         gap: 25px;
         border-bottom: 2px solid var(--amarelo);
     }
-    
-    /* Classe que o JS vai adicionar para abrir o menu */
     .nav-list.active { display: flex; }
 
-    /* Layouts empilhados */
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .section-header-flex { flex-direction: column; align-items: flex-start; gap: 20px; }
+    /* --- GERAL --- */
+    .section-header-flex { 
+        flex-direction: column; 
+        align-items: center; /* Centraliza título e botão */
+        text-align: center;
+        gap: 20px; 
+    }
     
     .project-row, 
     .project-row.reverse { 
         flex-direction: column; 
         gap: 30px; 
         margin-bottom: 80px; 
-        text-align: left; 
+        text-align: center; /* Centraliza textos dos projetos */
+    }
+    
+    .project-content ul li {
+        justify-content: center; /* Centraliza a lista de itens */
     }
     
     .project-image img { height: 250px; }
     
     .footer-flex { flex-direction: column; gap: 30px; text-align: center; }
     
-    .fleet-card { height: 400px; }
-    
     .page-header { padding-top: 130px; }
-    
-    .stats-row { justify-content: space-between; gap: 20px; }
-    .stat-item strong { font-size: 2rem; }
 }
