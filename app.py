@@ -1,19 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, render
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render('index.html')
 
 @app.route('/equipamentos')
 def equipamentos():
-    return render_template('equipamentos.html')
+    return render('equipamentos.html')
 
 # --- NOVA ROTA: SERVIÇOS/OBRAS ---
 @app.route('/servicos')
 def servicos():
-    return render_template('servicos.html')
+    return render('servicos.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

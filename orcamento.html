@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRANSJAP | Solicitar Orçamento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body class="bg-dark">
+
+   <header class="scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">TRANSJAP<span class="dot">.</span></a>
+            
+            <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                                        
+                    <li><a href="servicos.html" class="nav-link">Serviços</a></li>
+                    <li><a href="simulador.html" class="nav-link">Simulador</a></li>
+                    
+                    <li><a href="orcamento.html" class="btn-nav">Orçamento <i class="fas fa-arrow-right"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container center">
+            <span class="section-tag">FALE CONOSCO</span>
+            <h1 class="section-title text-white">SOLICITAR ORÇAMENTO</h1>
+            <p class="text-gray" style="max-width: 600px; margin: 0 auto;">
+                Preencha o formulário abaixo para uma cotação rápida ou entre em contato direto pelos nossos canais.
+            </p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container contact-grid">
+            
+            <div class="contact-info">
+                <h3>Canais de Atendimento</h3>
+                <p class="text-gray" style="margin-bottom: 30px;">Estamos prontos para atender sua obra em todo o Brasil.</p>
+                
+                <div class="info-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong>WhatsApp Comercial</strong>
+                        <p>(27) 99986-0110</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <strong>Telefone Fixo</strong>
+                        <p>(27) 3248-1122</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>E-mail</strong>
+                        <p>contato@transjap.com.br</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Sede</strong>
+                        <p>Rod. BR262 - Km 94,5 - Domingos Martins - ES</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <form id="whatsappForm">
+                    <div class="form-group">
+                        <label>Nome / Empresa</label>
+                        <input type="text" id="nome" placeholder="Seu nome ou da empresa" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tipo de Serviço/Máquina</label>
+                        <select id="servico">
+                            <option value="Locação de Máquina">Locação de Máquina</option>
+                            <option value="Terraplenagem">Serviço de Terraplenagem</option>
+                            <option value="Transporte">Transporte de Carga</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Local da Obra (Cidade/Estado)</label>
+                        <input type="text" id="local" placeholder="Ex: Vitória - ES" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mensagem / Detalhes</label>
+                        <textarea id="mensagem" rows="4" placeholder="Descreva o que você precisa..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">ENVIAR NO WHATSAPP <i class="fab fa-whatsapp"></i></button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container center">
+            <p class="text-gray">&copy; 2025 Transjap Transportes Dois Irmãos LTDA.</p>
+        </div>
+    </footer>
+
+    <script src="static/script.js"></script>
+    <script>
+        // SCRIPT ESPECÍFICO PARA O FORMULÁRIO DESTA PÁGINA
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const servico = document.getElementById('servico').value;
+            const local = document.getElementById('local').value;
+            const mensagem = document.getElementById('mensagem').value;
+
+            // Formata a mensagem
+            const texto = `*SOLICITAÇÃO DE ORÇAMENTO (Site)*%0A%0A` +
+                          `👤 *Nome:* ${nome}%0A` +
+                          `🚜 *Interesse:* ${servico}%0A` +
+                          `📍 *Local:* ${local}%0A` +
+                          `📝 *Detalhes:* ${mensagem}`;
+
+            // Abre o WhatsApp com a mensagem pronta
+            window.open(`https://wa.me/5527999860110?text=${texto}`, '_blank');
+        });
+    </script>
+</body>
+</html>

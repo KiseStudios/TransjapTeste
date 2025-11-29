@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRANSJAP | Orçamento de Terraplenagem</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body class="bg-dark">
+
+    <header class="scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">TRANSJAP<span class="dot">.</span></a>
+            
+            <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                                        
+                    <li><a href="servicos.html" class="nav-link">Serviços</a></li>
+                    <li><a href="simulador.html" class="nav-link active">Simulador</a></li>
+                    
+                    <li><a href="orcamento.html" class="btn-nav">Orçamento <i class="fas fa-arrow-right"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container center">
+            <span class="section-tag">ENGENHARIA DE CUSTOS</span>
+            <h1 class="section-title text-white">CALCULADORA DE TERRAPLENAGEM</h1>
+            <p class="text-gray" style="max-width: 800px; margin: 0 auto;">
+                Faça uma estimativa de custo baseada no volume de material e características do seu terreno.
+                <br><small>*Cálculos baseados em turno de 8h e fator de empolamento médio de 1.30.</small>
+            </p>
+        </div>
+    </section>
+
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calc-grid">
+                
+                <div class="calc-form-wrapper">
+                    <h3><i class="fas fa-ruler-combined"></i> Dados do Terreno</h3>
+                    
+                    <form id="calcForm">
+                        <div class="form-group">
+                            <label>Tipo de Serviço</label>
+                            <select id="tipoServico" required>
+                                <option value="corte">Corte e Escavação</option>
+                                <option value="aterro">Aterro e Compactação</option>
+                                <option value="limpeza">Limpeza de Camada Vegetal</option>
+                                <option value="demolicao">Demolição e Bota-Fora</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Área (m²)</label>
+                                <input type="number" id="area" placeholder="Ex: 1000" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Profundidade Média (m)</label>
+                                <input type="number" id="profundidade" placeholder="Ex: 2.5" step="0.1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tipo de Solo (Dificuldade)</label>
+                            <select id="solotipo" required>
+                                <option value="1.0">Solo 1ª Categoria (Terra solta/Areia)</option>
+                                <option value="1.4">Solo 2ª Categoria (Argila/Cascalho)</option>
+                                <option value="2.5">Solo 3ª Categoria (Rocha/Pedra)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Distância de Bota-Fora (Km)</label>
+                            <input type="number" id="distanciaTransporte" placeholder="Distância para descarte (se houver)" value="5">
+                        </div>
+
+                        <button type="button" class="btn-submit" onclick="calcularTerraplenagem()">
+                            <i class="fas fa-calculator"></i> CALCULAR OBRA
+                        </button>
+                    </form>
+                </div>
+
+                <div class="calc-result-wrapper" id="resultArea">
+                    <div class="empty-state">
+                        <i class="fas fa-mountain"></i>
+                        <p>Informe as dimensões do terreno para calcular o volume de corte e custo estimado.</p>
+                    </div>
+                    
+                    <div class="result-content" style="display: none;">
+                        <h3>Proposta Estimada</h3>
+                        
+                        <div class="price-box">
+                            <span>Valor Global Estimado</span>
+                            <h2 id="totalValue">R$ 0,00</h2>
+                            <small style="color: #000; display: block; margin-top: 5px;">Inclui Diesel, Operador e Encargos</small>
+                        </div>
+
+                        <div class="breakdown">
+                            <div class="break-item">
+                                <span><i class="fas fa-cube"></i> Volume Geométrico</span>
+                                <strong id="volGeo">0 m³</strong>
+                            </div>
+                            <div class="break-item">
+                                <span><i class="fas fa-cubes"></i> Volume Solto (Empolado)</span>
+                                <strong id="volSolto" style="color: var(--amarelo);">0 m³</strong>
+                            </div>
+                            <div class="break-item">
+                                <span><i class="fas fa-truck-loading"></i> Cargas de Caminhão (16m³)</span>
+                                <strong id="numViagens">0 viagens</strong>
+                            </div>
+                            <hr style="border-color: rgba(255,255,255,0.1);">
+                            <div class="break-item">
+                                <span>Prazo Estimado</span>
+                                <strong id="prazoDias">0 Dias Úteis</strong>
+                            </div>
+                        </div>
+
+                        <p class="disclaimer">
+                            *Cálculo considera Diesel a R$ 5,50 e produtividade média de frota CAT. Topografia final pode alterar volumes.
+                        </p>
+
+                        <a href="#" id="whatsappLink" class="btn-nav" style="width: 100%; justify-content: center; margin-top: 20px;">
+                            Solicitar Vistoria Técnica
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container center">
+            <p class="text-gray">&copy; 2025 Transjap Transportes Dois Irmãos LTDA.</p>
+        </div>
+    </footer>
+
+    <script src="static/script.js"></script>
+
+    <script>
+        function calcularTerraplenagem() {
+            // 1. INPUTS
+            const area = parseFloat(document.getElementById('area').value);
+            const profundidade = parseFloat(document.getElementById('profundidade').value);
+            const fatorDificuldade = parseFloat(document.getElementById('solotipo').value);
+            const distancia = parseFloat(document.getElementById('distanciaTransporte').value) || 0;
+            const tipoServico = document.getElementById('tipoServico').value;
+
+            if (!area || !profundidade) {
+                alert("Informe a Área e a Profundidade para calcular.");
+                return;
+            }
+
+            // 2. PARÂMETROS BASE
+            const dieselPreco = 5.50;
+            const consumoMedioKit = 40; // Litros/h (Escavadeira + 2 Caminhões)
+            const custoOperacionalKit = 450.00; // Valor hora do combo
+            const margemLucro = 1.35; 
+            const fatorEmpolamento = 1.30;
+
+            // 3. VOLUMETRIA
+            const volumeGeometrico = area * profundidade;
+            const volumeSolto = volumeGeometrico * fatorEmpolamento;
+
+            // 4. DEFINIÇÃO DA FROTA INTELIGENTE
+            let numeroFrentes = 1;
+            if (volumeSolto > 5000) numeroFrentes = 2;    
+            if (volumeSolto > 20000) numeroFrentes = 4;   
+            if (volumeSolto > 100000) numeroFrentes = 10; 
+            if (volumeSolto > 1000000) numeroFrentes = 30;
+
+            // 5. PRODUTIVIDADE
+            let produtividadePorFrente = 80 / fatorDificuldade; 
+            if (tipoServico === 'limpeza') produtividadePorFrente *= 2.5; 
+            if (tipoServico === 'demolicao') produtividadePorFrente *= 0.4;
+
+            const produtividadeTotalHora = produtividadePorFrente * numeroFrentes;
+
+            // 6. CÁLCULO DE TEMPO
+            const horasTotaisNecessarias = volumeSolto / produtividadeTotalHora;
+            const diasEstimados = Math.ceil(horasTotaisNecessarias / 8); 
+
+            // 7. CUSTOS
+            const fatorTransporte = 1 + (distancia * 0.08); 
+            const custoDiesel = horasTotaisNecessarias * (consumoMedioKit * numeroFrentes) * dieselPreco * fatorTransporte;
+            const custoEquipe = horasTotaisNecessarias * (custoOperacionalKit * numeroFrentes);
+
+            const custoBase = custoDiesel + custoEquipe;
+            const precoFinal = custoBase * margemLucro;
+
+            const viagens = Math.ceil(volumeSolto / 16);
+
+            // 8. EXIBIÇÃO
+            document.querySelector('.empty-state').style.display = 'none';
+            document.querySelector('.result-content').style.display = 'block';
+
+            const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            document.getElementById('totalValue').innerText = formatter.format(precoFinal);
+            document.getElementById('volGeo').innerText = volumeGeometrico.toLocaleString('pt-BR') + " m³";
+            document.getElementById('volSolto').innerText = volumeSolto.toLocaleString('pt-BR') + " m³";
+            document.getElementById('numViagens').innerText = "~ " + viagens.toLocaleString('pt-BR') + " viagens";
+            
+            // Prazo Inteligente
+            let prazoTexto = diasEstimados + " dias úteis";
+            if (diasEstimados > 22) {
+                const meses = (diasEstimados / 22).toFixed(1);
+                prazoTexto += ` (~${meses} meses)`;
+            }
+            document.getElementById('prazoDias').innerText = prazoTexto;
+            
+            // Link WhatsApp
+            const msg = `*ORÇAMENTO OBRA (${tipoServico.toUpperCase()})*%0A` +
+                        `📐 Área: ${area}m² x ${profundidade}m%0A` +
+                        `📦 Volume: ${volumeSolto.toFixed(0)}m³%0A` +
+                        `🚜 Frota Sugerida: ${numeroFrentes} Equipes%0A` +
+                        `📅 Prazo Est.: ${prazoTexto}%0A` +
+                        `💰 *Valor Est.: ${formatter.format(precoFinal)}*`;
+            
+            document.getElementById('whatsappLink').href = `https://wa.me/5527999860110?text=${msg}`;
+        }
+    </script>
+</body>
+</html>
